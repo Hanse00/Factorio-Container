@@ -42,3 +42,9 @@ WORKDIR /opt/factorio
 
 # Create a Save
 RUN /opt/factorio/bin/x64/factorio --create ./saves/default.zip
+
+# Start the Server
+ENTRYPOINT [ "/opt/factorio/bin/x64/factorio", "--start-server-load-latest" ]
+
+# The Factorio Server Port
+EXPOSE 34197/udp
