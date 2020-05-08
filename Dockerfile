@@ -7,7 +7,7 @@ ARG version=stable
 RUN apt-get update --quiet
 
 # Install curl and xz-utils (For Downloading & Decompressing the Factorio Archive)
-RUN apt-get install curl xz-utils --yes --quiet
+RUN apt-get install curl xz-utils python3 --yes --quiet
 
 # Create Factorio Group
 RUN groupadd factorio -g 1000
@@ -62,13 +62,13 @@ RUN ln -sfFT /mnt/factorio/saves /opt/factorio/saves
 RUN ln -sfFT /mnt/factorio/mods /opt/factorio/mods
 
 # Copy in the Start Script
-COPY --chown=factorio:factorio entrypoint.sh .
+COPY --chown=factorio:factorio entrypoint.py .
 
 # Make the Start Script Runnable
-RUN chmod u+x entrypoint.sh
+RUN chmod u+x entrypoint.py
 
 # Start the Server
-ENTRYPOINT [ "./entrypoint.sh" ]
+ENTRYPOINT [ "./entrypoint.py" ]
 
 # the Factorio Server Port
 EXPOSE 34197/udp
