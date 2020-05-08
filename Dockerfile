@@ -64,8 +64,17 @@ RUN rm -rf /opt/factorio/mods
 RUN ln -sfFT /mnt/factorio/saves /opt/factorio/saves
 RUN ln -sfFT /mnt/factorio/mods /opt/factorio/mods
 
+# Move Back to the Home Directory
+WORKDIR /home/factorio
+
+# Copy in the Start Script
+COPY --chown=factorio:factorio entrypoint.sh .
+
+# Make the Start Script Runnable
+RUN chmod u+x entrypoint.sh
+
 # Start the Server
-#ENTRYPOINT [ "/opt/factorio/bin/x64/factorio", "--start-server-load-latest" ]
+ENTRYPOINT [ "./entrypoint.sh" ]
 
 # The Factorio Server Port
 EXPOSE 34197/udp
