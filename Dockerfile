@@ -51,12 +51,18 @@ RUN bin/x64/factorio --create saves/default.zip
 RUN rm saves/default.zip
 
 # Create Symbolic Links to Configuration Files
-RUN ln -s /mnt/factorio/config/map-gen-settings.json config/map-gen-settings.json
-RUN ln -s /mnt/factorio/config/map-settings.json config/map-settings.json
-RUN ln -s /mnt/factorio/config/server-settings.json config/server-settings.json
-RUN ln -s /mnt/factorio/config/server-whitelist.json config/server-whitelist.json
-RUN ln -s /mnt/factorio/config/server-banlist.json config/server-banlist.json
-RUN ln -s /mnt/factorio/config/server-adminlist.json config/server-adminlist.json
+RUN ln -s /mnt/factorio/config/map-gen-settings.json /opt/factorio/config/map-gen-settings.json
+RUN ln -s /mnt/factorio/config/map-settings.json /opt/factorio/config/map-settings.json
+RUN ln -s /mnt/factorio/config/server-settings.json /opt/factorio/config/server-settings.json
+RUN ln -s /mnt/factorio/config/server-whitelist.json /opt/factorio/config/server-whitelist.json
+RUN ln -s /mnt/factorio/config/server-banlist.json /opt/factorio/config/server-banlist.json
+RUN ln -s /mnt/factorio/config/server-adminlist.json /opt/factorio/config/server-adminlist.json
+
+# Create Symbolic Links to Saves and Mods
+RUN rm -rf /opt/factorio/saves
+RUN rm -rf /opt/factorio/mods
+RUN ln -sfFT /mnt/factorio/saves /opt/factorio/saves
+RUN ln -sfFT /mnt/factorio/mods /opt/factorio/mods
 
 # Start the Server
 #ENTRYPOINT [ "/opt/factorio/bin/x64/factorio", "--start-server-load-latest" ]
