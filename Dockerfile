@@ -39,16 +39,13 @@ RUN curl -L https://factorio.com/get-download/${version}/headless/linux64 -o dow
 # But then we would need to do more work with chown to get all the permissions right, this seems easier.
 RUN tar -xf download.tar.xz -C /opt/factorio --strip-components=1
 
-# Clean up the download
+# Clean Up the Download
 RUN rm download.tar.xz
 
-# Move to the /opt/factorio Directory
-WORKDIR /opt/factorio
-
-# Create a Save - Then Delete it
+# Create a Save – Then Delete It
 # We do this to make the server generate a number of files and directories for us, which are generated on start.
-RUN bin/x64/factorio --create saves/default.zip
-RUN rm saves/default.zip
+RUN /opt/factorio/bin/x64/factorio --create /opt/factorio/saves/default.zip
+RUN rm /opt/factorio/saves/default.zip
 
 # Create Symbolic Links to Configuration Files
 RUN ln -s /mnt/factorio/config/map-gen-settings.json /opt/factorio/config/map-gen-settings.json
@@ -64,9 +61,6 @@ RUN rm -rf /opt/factorio/mods
 RUN ln -sfFT /mnt/factorio/saves /opt/factorio/saves
 RUN ln -sfFT /mnt/factorio/mods /opt/factorio/mods
 
-# Move Back to the Home Directory
-WORKDIR /home/factorio
-
 # Copy in the Start Script
 COPY --chown=factorio:factorio entrypoint.sh .
 
@@ -76,5 +70,5 @@ RUN chmod u+x entrypoint.sh
 # Start the Server
 ENTRYPOINT [ "./entrypoint.sh" ]
 
-# The Factorio Server Port
+# the Factorio Server Port
 EXPOSE 34197/udp
