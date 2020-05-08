@@ -6,14 +6,14 @@ ARG version=stable
 # Update Repository Information
 RUN apt-get update --quiet
 
-# Install curl and xz-utils (For Decompressing the Factorio Archive)
+# Install curl and xz-utils (For Downloading & Decompressing the Factorio Archive)
 RUN apt-get install curl xz-utils --yes --quiet
 
 # Create Factorio Group
-RUN groupadd factorio
+RUN groupadd factorio -g 1000
 
 # Create Factorio User
-RUN useradd --create-home factorio -g factorio
+RUN useradd --create-home factorio -g factorio -u 1000
 
 # Create a Factorio Directory in /opt and /mnt
 RUN mkdir /opt/factorio
@@ -21,7 +21,7 @@ RUN mkdir /mnt/factorio
 
 # Set Ownership of /opt/factorio and /mnt/factorio to Factorio
 RUN chown factorio:factorio /opt/factorio
-RUN chown -R factorio:factorio /mnt/factorio
+RUN chown factorio:factorio /mnt/factorio
 
 # Switch to the Factorio User
 USER factorio
