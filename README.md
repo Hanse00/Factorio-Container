@@ -1,3 +1,3 @@
 # Factorio Container
 
-A docker container for running Factorio servers.
+A [Docker](https://www.docker.com) container for running [Factorio](https://factorio.com) servers.

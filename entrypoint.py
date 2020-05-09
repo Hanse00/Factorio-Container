@@ -62,11 +62,11 @@ def populate_config_files():
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="A Factorio Server")
+    parser = argparse.ArgumentParser(description="A Factorio Server. The script is a lightweight utilitiy for handling the configuration and starting of the real Factorio server.")
     whitelist = parser.add_mutually_exclusive_group(required=True)
-    whitelist.add_argument("--whitelist", dest="whitelist", action="store_true", help="Enable the server whitelist.")
-    whitelist.add_argument("--no-whitelist", dest="whitelist", action="store_false", help="Disable the server whitelist.")
-    parser.add_argument("-s", "--save-file", dest="save", required=True, help="The name of the savefile to load (Eg. default.zip).")
+    whitelist.add_argument("--whitelist", dest="whitelist", action="store_true", help="Enable the server whitelist. (Note: Either this or --no-whitelist must be present)")
+    whitelist.add_argument("--no-whitelist", dest="whitelist", action="store_false", help="Disable the server whitelist. (Note: Either this or --whitelist must be present)")
+    parser.add_argument("-s", "--save-file", dest="save", required=True, help="The name of the save file to load out of the saves directory (Eg. default.zip).")
     args = parser.parse_args()
     return args
 
