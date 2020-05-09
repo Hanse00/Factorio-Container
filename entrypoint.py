@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+from pathlib import Path
 import shutil
 import subprocess
 
@@ -37,7 +38,7 @@ CONFIG_FILES = [
 
 def main():
     args = parse_args()
-    populate_config_files()
+    populate_volume()
     run_args = ["/opt/factorio/bin/x64/factorio", "--start-server"]
 
     save_path = f"/opt/factorio/saves/{args.save}"
@@ -53,14 +54,6 @@ def main():
     subprocess.call(run_args)
 
 
-def populate_config_files():
-    for config in CONFIG_FILES:
-        if file_is_accessible(config["path"]):
-            continue
-        else:
-            shutil.copy(config["template"], config["path"])
-
-
 def parse_args():
     parser = argparse.ArgumentParser(description="A Factorio Server. The script is a lightweight utilitiy for handling the configuration and starting of the real Factorio server.")
     whitelist = parser.add_mutually_exclusive_group(required=True)
@@ -69,6 +62,32 @@ def parse_args():
     parser.add_argument("-s", "--save-file", dest="save", required=True, help="The name of the save file to load out of the saves directory (Eg. default.zip).")
     args = parser.parse_args()
     return args
+
+
+def populate_volume():
+    for dir in ["/mnt/factorio/config", "/mnt/factorio/mods", "/mnt/factorio/saves"]:
+        if dir_is_accessible(dir):
+            continue
+        else:
+            Path(dir).mkdir()
+    populate_config_files()
+
+
+def populate_config_files():
+    for config in CONFIG_FILES:
+        if file_is_accessible(config["path"]):
+            continue
+        else:
+            shutil.copy(config["template"], config["path"])
+
+
+def dir_is_accessible(path):
+    try:
+        (Path(path) / "hello").touch()
+        (Path(path) / "hello").unlink()
+    except IOError:
+        return False
+    return True
 
 
 def file_is_accessible(path):

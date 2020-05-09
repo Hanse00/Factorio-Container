@@ -47,17 +47,11 @@ RUN rm download.tar.xz
 RUN /opt/factorio/bin/x64/factorio --create /opt/factorio/saves/default.zip
 RUN rm /opt/factorio/saves/default.zip
 
-# Create Symbolic Links to Configuration Files
-RUN ln -s /mnt/factorio/config/map-gen-settings.json /opt/factorio/config/map-gen-settings.json
-RUN ln -s /mnt/factorio/config/map-settings.json /opt/factorio/config/map-settings.json
-RUN ln -s /mnt/factorio/config/server-settings.json /opt/factorio/config/server-settings.json
-RUN ln -s /mnt/factorio/config/server-whitelist.json /opt/factorio/config/server-whitelist.json
-RUN ln -s /mnt/factorio/config/server-banlist.json /opt/factorio/config/server-banlist.json
-RUN ln -s /mnt/factorio/config/server-adminlist.json /opt/factorio/config/server-adminlist.json
-
-# Create Symbolic Links to Saves and Mods
+# Create Symbolic Links to Configs, Saves, and Mods
+RUN rm -rf /opt/factorio/config
 RUN rm -rf /opt/factorio/saves
 RUN rm -rf /opt/factorio/mods
+RUN ln -sfFT /mnt/factorio/config /opt/factorio/config
 RUN ln -sfFT /mnt/factorio/saves /opt/factorio/saves
 RUN ln -sfFT /mnt/factorio/mods /opt/factorio/mods
 
