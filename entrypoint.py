@@ -37,8 +37,9 @@ CONFIG_FILES = [
 
 
 def main():
-    args = parse_args()
     populate_volume()
+
+    args = parse_args()
     run_args = ["/opt/factorio/bin/x64/factorio", "--start-server"]
 
     save_path = f"/opt/factorio/saves/{args.save}"
