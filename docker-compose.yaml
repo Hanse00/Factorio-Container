@@ -1,0 +1,5 @@
+version: "3.8"
+services:
+    factorio:
+        image: hanse01/factorio-container:${FACTORIO_VERSION:-stable}
+        build: .
