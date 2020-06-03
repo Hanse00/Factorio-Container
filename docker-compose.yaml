@@ -1,8 +1,11 @@
 version: "3.8"
 services:
     factorio:
+        command: -s ${FACTORIO_SAVE_FILE:?A save file is required.}
         image: hanse01/factorio-container:${FACTORIO_VERSION:-stable}
         build:
             context: .
             args:
                 version: ${FACTORIO_VERSION:-stable}
+        volumes:
+            - "${FACTORIO_DATA_DIRECTORY:-~/factorio}:/mnt/factorio"
