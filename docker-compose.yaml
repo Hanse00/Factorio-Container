@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+    factorio:
+        stdin_open: true
+        tty: true
+        command: -s ${FACTORIO_SAVE_FILE:?A save file is required.} ${FACTORIO_WHITELIST:?Whitelist setting is required.}
+        image: hanse01/factorio-container:${FACTORIO_VERSION:-stable}
+        build:
+            context: .
+            args:
+                VERSION: ${FACTORIO_VERSION:-stable}
+        volumes:
+            - "${FACTORIO_DATA_DIRECTORY:-~/factorio}:/mnt/factorio"
+        ports:
+            - "34197:34197/udp"
