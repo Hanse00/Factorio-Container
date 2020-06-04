@@ -1,6 +1,8 @@
 version: "3.8"
 services:
     factorio:
+        stdin_open: true
+        tty: true
         command: -s ${FACTORIO_SAVE_FILE:?A save file is required.} ${FACTORIO_WHITELIST:?Whitelist setting is required.}
         image: hanse01/factorio-container:${FACTORIO_VERSION:-stable}
         build:
