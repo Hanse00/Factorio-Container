@@ -1,7 +1,7 @@
 version: "3.8"
 services:
     factorio:
-        command: -s ${FACTORIO_SAVE_FILE:?A save file is required.}
+        command: -s ${FACTORIO_SAVE_FILE:?A save file is required.} ${FACTORIO_WHITELIST:?Whitelist setting is required.}
         image: hanse01/factorio-container:${FACTORIO_VERSION:-stable}
         build:
             context: .
