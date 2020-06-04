@@ -1,7 +1,7 @@
 FROM debian:buster
 
 # Defines the Factorio Version
-ARG version=stable
+ARG VERSION=stable
 
 # Update Repository Information
 RUN apt-get update --quiet
@@ -30,7 +30,7 @@ USER factorio
 WORKDIR /home/factorio
 
 # Download Factorio Server Archive
-RUN curl -L https://factorio.com/get-download/${version}/headless/linux64 -o download.tar.xz
+RUN curl -L https://factorio.com/get-download/${VERSION}/headless/linux64 -o download.tar.xz
 
 # Extract the Factorio Archive to /opt/factorio
 # We use strip-components=1, because the archive contains a "factorio" directory, which contains everything we need.

@@ -6,7 +6,7 @@ services:
         build:
             context: .
             args:
-                version: ${FACTORIO_VERSION:-stable}
+                VERSION: ${FACTORIO_VERSION:-stable}
         volumes:
             - "${FACTORIO_DATA_DIRECTORY:-~/factorio}:/mnt/factorio"
         ports:

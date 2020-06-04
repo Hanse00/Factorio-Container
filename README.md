@@ -52,14 +52,14 @@ The entrypoint takes two more arguments, which are used in starting the factorio
 
 ## Building
 
-It is possible to build the container from scratch, if you wish to do so. The [Dockerfile](../blob/master/Dockerfile) takes exactly one build argument: `version`. This argument is used to specify which version of Factorio the container should be built for. By default `stable` is used.
+It is possible to build the container from scratch, if you wish to do so. The [Dockerfile](../blob/master/Dockerfile) takes exactly one build argument: `VERSION`. This argument is used to specify which version of Factorio the container should be built for. By default `stable` is used.
 
 See https://factorio.com/download-headless for valid values of this parameter.
 
 Examples:
 * `docker build .` - Builds a container for Factorio `stable`
-* `docker build --build-arg version=latest .` - Builds a container for Factorio's latest experimental version
-* `docker build --build-arg version=0.18.18 .`- Builds a container for Factorio version 0.18.18
+* `docker build --build-arg VERSION=latest .` - Builds a container for Factorio's latest experimental version
+* `docker build --build-arg VERSION=0.18.18 .`- Builds a container for Factorio version 0.18.18
 
 ***
 
